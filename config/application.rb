@@ -19,8 +19,8 @@ module Eatloco
   class Application < Rails::Application
 
     config.generators do |g|
-      
-      
+
+
     end
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -72,5 +72,8 @@ module Eatloco
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    #Filepicker API Key
+    config.filepicker_rails.api_key = ENV["FILEPICKER_API_KEY"]
   end
 end

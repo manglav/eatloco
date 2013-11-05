@@ -25,6 +25,7 @@ class DishesController < ApplicationController
   # GET /dishes/new.json
   def new
     @dish = Dish.new
+    @attachment = Attachment.new
 
     respond_to do |format|
       format.html # new.html.erb
