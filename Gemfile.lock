@@ -40,6 +40,7 @@ GEM
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     builder (3.0.4)
+    callsite (0.0.11)
     cancan (1.6.10)
     coderay (1.1.0)
     coffee-rails (3.2.2)
@@ -73,7 +74,8 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    meta_request (0.2.2)
+    meta_request (0.2.8)
+      callsite
       rack-contrib
       railties
     mime-types (1.25)
@@ -156,7 +158,7 @@ DEPENDENCIES
   devise
   figaro
   jquery-rails
-  meta_request
+  meta_request (~> 0.2.5)
   quiet_assets
   rails (= 3.2.14)
   rails_layout

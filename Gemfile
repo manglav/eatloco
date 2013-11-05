@@ -21,5 +21,5 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'awesome_print'
-  gem 'meta_request'
+  gem 'meta_request', '~> 0.2.5'
 end
