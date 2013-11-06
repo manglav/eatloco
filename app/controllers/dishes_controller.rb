@@ -1,4 +1,5 @@
 class DishesController < ApplicationController
+  before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
   # GET /dishes
   # GET /dishes.json
   def index
@@ -36,12 +37,13 @@ class DishesController < ApplicationController
   # GET /dishes/1/edit
   def edit
     @dish = Dish.find(params[:id])
+    @attachment = Attachment.new
   end
 
   # POST /dishes
   # POST /dishes.json
   def create
-    @dish = Dish.new(params[:dish])
+    @dish = current_user.dishes.new(params[:dish])
 
     respond_to do |format|
       if @dish.save

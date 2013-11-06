@@ -11,4 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   has_many :attachments, foreign_key: :uploader_id
+
+  has_many :dishes
+
 end
