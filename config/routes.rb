@@ -10,4 +10,5 @@ Eatloco::Application.routes.draw do
   resources :dishes
   resources :attachments
   resources :menus, only: [:index]
+  resources :orders
 end
