@@ -3,7 +3,8 @@
 
   <div class="form-inputs">
 		<%= f.input :name, label: 'Name of the Dish', hint: 'Between 6 and 30 characters please' %>
-		<input type="text" id="dish_menu_id" name="dish[menu_id]">
+		<%= f.association :menu %>
+		<input type="text" id="dish_menu_id_text" name="dish[menu_id]">
 		<% @dish.photo_ids.each do |photo_id| %>
 			<input id="dish_photo_ids" name="dish[photo_ids][]" hidden="true" value="<%= photo_id %>"></input>
 			<% end %>
@@ -35,10 +36,17 @@
 <script type="text/javascript">
 
 $(function() {
-	$('#dish_menu_id').typeahead({
-	  name: 'menus',
-	  local: ["crazy", "united states of america"],
-		limit: 10
+
+// 	$('#dish_menu_id_text').typeahead({
+// 	  name: 'menus',
+// 	  local: ["crazy", "united states of america"],
+// 		limit: 10
+// 	});
+// });
+	$('#dish_menu_id').chosen({
+	  disable_search_threshold: 10,
+	  no_results_text: "Oops, nothing found!",
+	  width: "95%"
 	});
 });
 
