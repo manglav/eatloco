@@ -7,7 +7,7 @@
 		<% if dish.photos.first %>
 			<li class="span4">
 				<%= filepicker_image_tag dish.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-				<p><%= link_to dish.name, dish %></p>
+				<p><%= link_to dish.menu.name, dish %></p>
 			</li>
 		<% end %>
 <% end %>
