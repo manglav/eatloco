@@ -1,21 +1,16 @@
+<%= link_to 'New Dish', new_dish_path %>
+
 <h1>Dishes Directory</h1>
 
-<table>
-  <tr>
-    <th>Dish Name</th>
-    <th>Empty Field 1</th>
-    <th>Empty Field 2</th>
-  </tr>
-
+<ul class="thumbnails">
 <% @dishes.each do |dish| %>
-  <tr>
-    <td><%= link_to dish.name, dish %></td>
-    <td><%= link_to 'Edit', edit_dish_path(dish) %></td>
-    <td><%= link_to 'Destroy', dish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+		<% if dish.photos.first %>
+			<li class="span4">
+				<%= filepicker_image_tag dish.photos.first.url, w: 160, h: 160, fit: 'clip' %>
+				<p><%= link_to dish.name, dish %></p>
+			</li>
+		<% end %>
 <% end %>
-</table>
 
-<br />
+</ul>
 
-<%= link_to 'New Dish', new_dish_path %>

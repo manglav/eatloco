@@ -1,6 +1,20 @@
-<h3>User</h3>
+<h3>My Profile Page</h3>
 <p>User: <%= @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
 
+<h3>My Dishes</h3>
+	<%= link_to "Create New Dish", new_dish_url %>
+	<% @user.dishes.each do |dish| %>
+		<p>
+			<%= link_to dish.name, dish %>
+			<%= link_to "Edit", edit_dish_url(dish) %>
+			<%= link_to "Destroy", dish_url(dish), method: :delete, data: { confirm: 'Are you sure?' } %>
+		</p>
+		<% dish.photos.each do |photo| %>
+			<%= filepicker_image_tag photo.url, w: 160, h: 160, fit: 'clip' %>
+		<% end %>
+		<br>
+	<% end %>
 
-<%= link_to "Create New Dish", new_dish_url %>
+<h3>My Orders</h3>
+

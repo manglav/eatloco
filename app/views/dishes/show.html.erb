@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <%= @dish.name %>
+<% @dish.photos.each do |photo| %>
+	<%= filepicker_image_tag photo.url, w: 160, h: 160, fit: 'clip' %>
+<% end %>
 
 <br>
 
