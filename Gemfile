@@ -16,6 +16,7 @@ gem 'rolify'
 gem 'simple_form'
 gem 'thin'
 gem 'filepicker-rails'
+gem 'twitter-typeahead-rails'
 
 group :development do
   gem 'better_errors'

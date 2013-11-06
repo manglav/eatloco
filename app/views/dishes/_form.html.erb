@@ -2,13 +2,14 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-		<%= f.input :name, label: 'Name of the Dish', hint: 'Between 6 and 12 characters please' %>
+		<%= f.input :name, label: 'Name of the Dish', hint: 'Between 6 and 30 characters please' %>
+		<input type="text" id="dish_menu_id" name="dish[menu_id]">
 		<% @dish.photo_ids.each do |photo_id| %>
 			<input id="dish_photo_ids" name="dish[photo_ids][]" hidden="true" value="<%= photo_id %>"></input>
 			<% end %>
   </div>
 
-	<%= simple_form_for(@attachment) do |a| %>
+	<%= simple_form_for(Attachment.new) do |a| %>
 	  <%= a.error_notification %>
 
 	    <%= a.label :filepicker_url, "Upload Your Pictures:" %>
@@ -32,6 +33,14 @@
 
 
 <script type="text/javascript">
+
+$(function() {
+	$('#dish_menu_id').typeahead({
+	  name: 'menus',
+	  local: ["crazy", "united states of america"],
+		limit: 10
+	});
+});
 
 var processPhotos = function() {
 	event.fpfiles.forEach(function(file) {
