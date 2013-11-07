@@ -1,6 +1,6 @@
 class HardWorker
   include Sidekiq::Worker
-  def perform(name, count)
-    CounterOrder.create!(notes: "MADE BY SIDEKIQ")
+  def perform
+    CounterOrder.create!(notes: "MADE BY SIDEKIQ at #{Time.now}")
   end
 end

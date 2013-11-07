@@ -18,6 +18,7 @@ gem 'thin'
 gem 'filepicker-rails'
 gem 'twitter-typeahead-rails'
 gem 'sidekiq'
+gem 'sinatra', '>= 1.3.0', :require => nil
 
 group :development do
   gem 'better_errors'

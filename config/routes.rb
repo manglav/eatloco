@@ -1,5 +1,7 @@
 Eatloco::Application.routes.draw do
 
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 
   authenticated :user do
     root :to => 'home#index'
