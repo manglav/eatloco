@@ -40,7 +40,8 @@ class OriginalOrdersController < ApplicationController
   # POST /original_orders
   # POST /original_orders.json
   def create
-    @original_order = OriginalOrder.new(params[:original_order])
+    @original_order = OriginalOrder.new(params[:original_order].slice( *OriginalOrder.accessible_attributes ))
+    @original_order.menu_id = params[:original_order][:menu_id]
 
     respond_to do |format|
       if @original_order.save

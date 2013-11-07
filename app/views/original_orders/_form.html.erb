@@ -2,9 +2,47 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+		<% if @original_order.new_record? %>
+			<%= f.association :menu %>
+		<% else %>
+			<h3><%= @original_order.menu.name %></h3>
+		<% end %>
+		<%= f.input :g_weight %>
+		<%= f.input :desired_price %>
+		<%= f.input :expiration_date, as: :string, input_html: { class: "datetimepicker", value: @original_order.expiration_date.to_s[0...-7] } %>
+		<%= f.input :delivery_date , as: :string, input_html: { class: "datetimepicker", value: @original_order.delivery_date.to_s[0...-7] } %>
+		<%= f.input :notes %>
+		<%= f.input :delivery_type, collection: ["delivery", "pickup", "neutral"] %>
+
   </div>
 
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
 <% end %>
+
+
+<script type="text/javascript">
+  $(function() {
+
+		$('.datetimepicker').datetimepicker({
+		    format: 'yyyy-mm-dd hh:ii',
+				startView: 2,
+				todayBtn: "linked",
+				startDate: "2013-11-03",
+				endDate: "",
+				autoclose: 1,
+				todayHighlight: 1,
+				minuteStep: 15,
+				showMeridian: 1,
+				// initialDate: <%= @original_order.expiration_date %>
+		});
+
+		$('#original_order_menu_id').chosen({
+		  disable_search_threshold: 10,
+		  no_results_text: "Oops, nothing found!",
+		  width: "95%"
+		});
+
+  });
+</script>

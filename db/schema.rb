@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131107022023) do
+ActiveRecord::Schema.define(:version => 20131107023531) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "uploader_id"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20131107022023) do
     t.string   "delivery_type"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.integer  "menu_id"
   end
 
   create_table "roles", :force => true do |t|
