@@ -1,0 +1,21 @@
+<h1>Listing original_orders</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @original_orders.each do |original_order| %>
+  <tr>
+    <td><%= link_to 'Show', original_order %></td>
+    <td><%= link_to 'Edit', edit_original_order_path(original_order) %></td>
+    <td><%= link_to 'Destroy', original_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Original order', new_original_order_path %>

@@ -1,0 +1,2 @@
+module CounterOrdersHelper
+end

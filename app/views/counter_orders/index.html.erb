@@ -1,0 +1,21 @@
+<h1>Listing counter_orders</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @counter_orders.each do |counter_order| %>
+  <tr>
+    <td><%= link_to 'Show', counter_order %></td>
+    <td><%= link_to 'Edit', edit_counter_order_path(counter_order) %></td>
+    <td><%= link_to 'Destroy', counter_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Counter order', new_counter_order_path %>
