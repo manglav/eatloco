@@ -2,9 +2,33 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+		<%= f.input :g_weight %>
+		<%= f.input :desired_price %>
+		<%= f.input :expiration_date, as: :string, input_html: { class: "datetimepicker" } %>
+		<%= f.input :delivery_date , as: :string, input_html: { class: "datetimepicker" } %>
+		<%= f.input :notes %>
+		<%= f.input :delivery_type %>
+
   </div>
 
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
 <% end %>
+
+
+<script type="text/javascript">
+  $(function() {
+		$('.datetimepicker').datetimepicker({
+		    format: 'yyyy-mm-dd hh:ii',
+				startView: 2,
+				todayBtn: "linked",
+				startDate: "2013-11-03",
+				endDate: "",
+				autoclose: 1,
+				todayHighlight: 1,
+				minuteStep: 15,
+				showMeridian: 1,
+		});
+  });
+</script>
