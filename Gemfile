@@ -17,6 +17,7 @@ gem 'simple_form'
 gem 'thin'
 gem 'filepicker-rails'
 gem 'twitter-typeahead-rails'
+gem 'sidekiq'
 
 group :development do
   gem 'better_errors'
