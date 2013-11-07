@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131107023531) do
+ActiveRecord::Schema.define(:version => 20131107190538) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "uploader_id"
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(:version => 20131107023531) do
     t.integer  "original_order_id"
     t.integer  "g_weight"
     t.integer  "desired_price"
-    t.datetime "expiration_date"
     t.datetime "delivery_date"
     t.text     "notes"
     t.string   "delivery_type"

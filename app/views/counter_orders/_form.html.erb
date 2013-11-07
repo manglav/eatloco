@@ -1,13 +1,12 @@
-<%= simple_form_for(@counter) do |f| %>
+<%= simple_form_for(@counter_order) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
 		<%= f.input :g_weight %>
 		<%= f.input :desired_price %>
-		<%= f.input :expiration_date, as: :string, input_html: { class: "datetimepicker" } %>
-		<%= f.input :delivery_date , as: :string, input_html: { class: "datetimepicker" } %>
+		<%= f.input :delivery_date, as: :string, input_html: { class: "datetimepicker", value: @counter_order.delivery_date.to_s[0...-7] } %>
 		<%= f.input :notes %>
-		<%= f.input :delivery_type %>
+		<%= f.input :delivery_type, collection: ["delivery", "pickup", "neutral"] %>
 
   </div>
 
