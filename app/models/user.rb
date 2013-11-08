@@ -28,10 +28,6 @@ class User < ActiveRecord::Base
     ## add condition that originalorder id NOT in user.counter_orders(array)
   end
 
-  def won_orders
-    self.counter_orders.where(:id => self.bidded_orders.expired.pluck(:winner_id))
-  end
-
   def successful_orders
     self.original_orders.expired.has_winner
   end
@@ -39,5 +35,15 @@ class User < ActiveRecord::Base
   def failed_orders
     self.original_orders.expired.no_winner
   end
+
+  def won_orders
+    self.counter_orders.where(:id => self.bidded_orders.expired.pluck(:winner_id))
+  end
+
+  def lost_orders
+    self.counter_orders.where("id != ?", self.bidded_orders.expired.pluck(:winner_id))
+  end
+
+
 
 end

@@ -93,6 +93,30 @@
 		<% end %>
 		</ul>
 
+	<h3>Failed Orders</h3>
 
+		<ul class="thumbnails">
+		<% @user.failed_orders.each do |fail_order| %>
+			<li class="span3">
+				<div class="thumbnail">
+					<%= filepicker_image_tag fail_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
+					<p><%= link_to fail_order.menu.name, fail_order %></p>
+				</div>
+			</li>
+		<% end %>
+		</ul>
+
+	<h3>Lost Orders</h3>
+
+		<ul class="thumbnails">
+		<% @user.lost_orders.each do |lost_order| %>
+			<li class="span3">
+				<div class="thumbnail">
+					<%= filepicker_image_tag lost_order.original_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
+					<p><%= link_to lost_order.original_order.menu.name, lost_order %></p>
+				</div>
+			</li>
+		<% end %>
+		</ul>
 
 
