@@ -2,32 +2,48 @@
 <p>User: <%= @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
 
-<h3>My Dishes</h3>
-	<%= link_to "Create New Dish", new_dish_url %>
+<h3>My Dishes (<%= link_to "Create New Dish", new_dish_url %>)</h3>
+
+	<ul class="thumbnails">
 	<% @user.dishes.each do |dish| %>
-		<p>
-			<%= link_to dish.menu.name, dish %>
-			<%= link_to "Edit", edit_dish_url(dish) %>
-			<%= link_to "Destroy", dish_url(dish), method: :delete, data: { confirm: 'Are you sure?' } %>
-		</p>
-		<% dish.photos.each do |photo| %>
-			<%= filepicker_image_tag photo.url, w: 160, h: 160, fit: 'clip' %>
-		<% end %>
-		<br>
+		<li class="span3">
+			<div class="thumbnail">
+				<%= filepicker_image_tag dish.photos.first.url, w: 160, h: 160, fit: 'clip' %>
+				<p><%= link_to dish.name, dish %></p>
+	    	<p><%= link_to "Edit", edit_dish_url(dish) %></p>
+	    	<p><%= link_to "Destroy", dish_url(dish), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+			</div>
+		</li>
 	<% end %>
+	</ul>
 
-<h3>My Orders</h3>
+<h3>My Orders (<%= link_to "Create New Order", new_original_order_url %>)</h3>
 
-user_id
-parent_id
-winner_id
+	<ul class="thumbnails">
+	<% @user.original_orders.each do |order| %>
+		<li class="span3">
+			<div class="thumbnail">
+				<%= filepicker_image_tag order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
+				<p><%= link_to order.menu.name, order %></p>
+	    	<p><%= link_to "Edit", edit_original_order_url(order) %></p>
+	    	<p><%= link_to "Destroy", original_order_url(order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+			</div>
+		</li>
+	<% end %>
+	</ul>
 
-#order has g_weight (Grams)
-order has desired_price (Cents)
-order has delivery date
-order has deciding date
-order has notes
-delivery_type
+<h3>My Elgible Orders</h3>
 
-winner_id (counter order id)
-parent_id
+	<ul class="thumbnails">
+	<% @user.elgible_orders.each do |elg_order| %>
+		<li class="span3">
+			<div class="thumbnail">
+				<%= filepicker_image_tag elg_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
+				<p><%= link_to elg_order.menu.name, elg_order %></p>
+	    	<p><%= link_to "Edit", edit_original_order_url(elg_order) %></p>
+			</div>
+		</li>
+	<% end %>
+	</ul>
+
+

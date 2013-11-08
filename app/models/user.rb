@@ -14,6 +14,12 @@ class User < ActiveRecord::Base
 
   has_many :dishes
 
-  has_many :orders
+  has_many :original_orders
+
+  def elgible_orders
+    OriginalOrder.where(:menu_id => self.dishes.pluck(:menu_id))
+    .where("expiration_date > ?", Time.now)
+    .where("user_id != ?", self.id)
+  end
 
 end

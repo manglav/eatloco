@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
 		<% if @original_order.new_record? %>
-			<%= f.association :menu %>
+			<%= f.association :menu, collection: @available_dishes %>
 		<% else %>
 			<h3><%= @original_order.menu.name %></h3>
 		<% end %>

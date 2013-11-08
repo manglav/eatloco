@@ -24,6 +24,7 @@ class OriginalOrdersController < ApplicationController
   # GET /original_orders/new
   # GET /original_orders/new.json
   def new
+    @available_dishes = Menu.joins(:dishes).uniq
     @original_order = OriginalOrder.new
 
     respond_to do |format|
@@ -40,7 +41,7 @@ class OriginalOrdersController < ApplicationController
   # POST /original_orders
   # POST /original_orders.json
   def create
-    @original_order = OriginalOrder.new(params[:original_order].slice( *OriginalOrder.accessible_attributes ))
+    @original_order = current_user.original_orders.new(params[:original_order].slice( *OriginalOrder.accessible_attributes ))
     @original_order.menu_id = params[:original_order][:menu_id]
 
     respond_to do |format|

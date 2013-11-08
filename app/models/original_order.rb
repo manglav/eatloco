@@ -3,12 +3,11 @@ class OriginalOrder < ActiveRecord::Base
 
   validates :delivery_type, inclusion: { in: %w(delivery pickup neutral), message: "Please pick a valid delivery type."}
 
+  #scope :fresh, where("expiration_date < ?", Time.now)
 
   belongs_to :user
   has_many :counter_orders
   belongs_to :menu
 
 
-
 end
-
