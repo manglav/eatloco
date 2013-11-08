@@ -24,7 +24,8 @@ class CounterOrdersController < ApplicationController
   # GET /counter_orders/new
   # GET /counter_orders/new.json
   def new
-    @counter_order = CounterOrder.new
+    @original_order = OriginalOrder.find(params[:original_order_id])
+    @counter_order = @original_order.counter_orders.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +41,8 @@ class CounterOrdersController < ApplicationController
   # POST /counter_orders
   # POST /counter_orders.json
   def create
-    @counter_order = CounterOrder.new(params[:counter_order])
+    @original_order = OriginalOrder.find(params[:original_order_id])
+    @counter_order = @original_order.counter_orders.new(params[:counter_order])
 
     respond_to do |format|
       if @counter_order.save

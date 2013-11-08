@@ -12,6 +12,8 @@ Eatloco::Application.routes.draw do
   resources :dishes
   resources :attachments
   resources :menus, only: [:index]
-  resources :original_orders
-  resources :counter_orders
+  resources :original_orders do
+    resources :counter_orders, only: [:new, :create]
+  end
+  resources :counter_orders, except: [:new, :create]
 end
