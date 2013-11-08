@@ -21,8 +21,8 @@ class User < ActiveRecord::Base
 
 
   def elgible_orders
-    OriginalOrder.where(:menu_id => self.dishes.pluck(:menu_id))
-      .in_progress
+    OriginalOrder.in_progress
+      .where(:menu_id => self.dishes.pluck(:menu_id))
       .where("user_id != ?", self.id)
       .where("id != ?", self.bidded_order_ids)
     ## add condition that originalorder id NOT in user.counter_orders(array)

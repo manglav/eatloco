@@ -36,11 +36,10 @@ var sample = function() {
 		}
 
 		$.ajax({
-			url: "/attachments.json",
+			url: "/attachments",
 			type: "POST",
 			data: {attachment: newfile},
 			success: function (data) {
-				console.log(data);
 				displayPicture(data);
 				addAttachmentID(data);
 			},
