@@ -17,10 +17,10 @@
 	<% end %>
 	</ul>
 
-<h3>My Orders (<%= link_to "Create New Order", new_original_order_url %>)</h3>
+<h3>My In Progress Orders (<%= link_to "Create New Order", new_original_order_url %>)</h3>
 
 	<ul class="thumbnails">
-	<% @user.original_orders.each do |order| %>
+	<% @user.original_orders.in_progress.each do |order| %>
 		<li class="span3">
 			<div class="thumbnail">
 				<%= filepicker_image_tag order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
@@ -32,7 +32,7 @@
 	<% end %>
 	</ul>
 
-<h3>My Elgible Orders</h3>
+<h3>EatLoCo Orders for Me</h3>
 
 	<ul class="thumbnails">
 	<% @user.elgible_orders.each do |elg_order| %>
@@ -51,7 +51,7 @@
 	<h3>My Counter Orders</h3>
 
 		<ul class="thumbnails">
-		<% @user.counter_orders.each do |counter_order| %>
+		<% @user.counter_orders.in_progress.each do |counter_order| %>
 			<li class="span3">
 				<div class="thumbnail">
 					<%= filepicker_image_tag counter_order.original_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
@@ -62,3 +62,37 @@
 			</li>
 		<% end %>
 		</ul>
+
+	<h3>Food I Will Receive</h3>
+
+		<ul class="thumbnails">
+		<% @user.successful_orders.each do |successful_order| %>
+			<li class="span3">
+				<div class="thumbnail">
+					<%= filepicker_image_tag successful_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
+					<p><%= link_to successful_order.menu.name, successful_order %></p>
+					<p><%= link_to "Destroy", counter_order_url(successful_order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+				</div>
+			</li>
+		<% end %>
+		</ul>
+
+
+	<h3>Food I Must Make</h3>
+
+		<ul class="thumbnails">
+		<% @user.won_orders.each do |won_order| %>
+			<li class="span3">
+				<div class="thumbnail">
+					<%= filepicker_image_tag won_order.original_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
+					<p><%= link_to won_order.original_order.menu.name, won_order %></p>
+		    	<p><%= link_to "Edit", edit_counter_order_url(won_order) %></p>
+					<p><%= link_to "Destroy", counter_order_url(won_order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+				</div>
+			</li>
+		<% end %>
+		</ul>
+
+
+
+

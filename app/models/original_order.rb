@@ -3,8 +3,12 @@ class OriginalOrder < ActiveRecord::Base
 
   validates :delivery_type, inclusion: { in: %w(delivery pickup neutral), message: "Please pick a valid delivery type."}
 
-  validate :winner_is_a_counter_order
-  #scope :fresh, where("expiration_date < ?", Time.now)
+  # validate :winner_is_a_counter_order
+  scope :in_progress, where("expiration_date > ?", Time.now)
+  scope :expired, where("expiration_date < ?", Time.now)
+  scope :has_winner, where("winner_id IS NOT NULL")
+  scope :no_winner, where(winner_id: nil)
+
 
   belongs_to :user
   has_many :counter_orders
@@ -12,7 +16,5 @@ class OriginalOrder < ActiveRecord::Base
 
   belongs_to :winner, class_name: "CounterOrder", foreign_key: :winner_id
 
-  def winner_is_a_counter_order
 
-  end
 end

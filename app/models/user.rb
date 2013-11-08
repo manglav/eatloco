@@ -19,16 +19,25 @@ class User < ActiveRecord::Base
 
   has_many :bidded_orders, through: :counter_orders, source: :original_order
 
+
   def elgible_orders
     OriginalOrder.where(:menu_id => self.dishes.pluck(:menu_id))
-    .where("expiration_date > ?", Time.now)
-    .where("user_id != ?", self.id)
-    .where("id != ?", self.bidded_order_ids)
+      .in_progress
+      .where("user_id != ?", self.id)
+      .where("id != ?", self.bidded_order_ids)
     ## add condition that originalorder id NOT in user.counter_orders(array)
   end
 
-  def current_counter_orders
+  def won_orders
+    self.counter_orders.where(:id => self.bidded_orders.expired.pluck(:winner_id))
+  end
 
+  def successful_orders
+    self.original_orders.expired.has_winner
+  end
+
+  def failed_orders
+    self.original_orders.expired.no_winner
   end
 
 end
