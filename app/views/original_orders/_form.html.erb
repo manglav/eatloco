@@ -6,6 +6,7 @@
 			<%= f.association :menu, collection: @available_dishes %>
 		<% else %>
 			<h3><%= @original_order.menu.name %></h3>
+			<%= f.association :winner, collection: @counter_orders, :label_method => lambda { |co| "#{co.user.name} | #{co.g_weight} | #{co.desired_price} | #{co.delivery_type}"} %>
 		<% end %>
 		<%= f.input :g_weight %>
 		<%= f.input :desired_price %>

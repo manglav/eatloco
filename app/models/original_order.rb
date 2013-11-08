@@ -3,11 +3,16 @@ class OriginalOrder < ActiveRecord::Base
 
   validates :delivery_type, inclusion: { in: %w(delivery pickup neutral), message: "Please pick a valid delivery type."}
 
+  validate :winner_is_a_counter_order
   #scope :fresh, where("expiration_date < ?", Time.now)
 
   belongs_to :user
   has_many :counter_orders
   belongs_to :menu
 
+  belongs_to :winner, class_name: "CounterOrder", foreign_key: :winner_id
 
+  def winner_is_a_counter_order
+
+  end
 end

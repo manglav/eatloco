@@ -15,11 +15,20 @@ class User < ActiveRecord::Base
   has_many :dishes
 
   has_many :original_orders
+  has_many :counter_orders
+
+  has_many :bidded_orders, through: :counter_orders, source: :original_order
 
   def elgible_orders
     OriginalOrder.where(:menu_id => self.dishes.pluck(:menu_id))
     .where("expiration_date > ?", Time.now)
     .where("user_id != ?", self.id)
+    .where("id != ?", self.bidded_order_ids)
+    ## add condition that originalorder id NOT in user.counter_orders(array)
+  end
+
+  def current_counter_orders
+
   end
 
 end

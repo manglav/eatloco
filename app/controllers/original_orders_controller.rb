@@ -35,7 +35,8 @@ class OriginalOrdersController < ApplicationController
 
   # GET /original_orders/1/edit
   def edit
-    @original_order = OriginalOrder.find(params[:id])
+    @original_order = OriginalOrder.includes(:counter_orders).find(params[:id])
+    @counter_orders = @original_order.counter_orders
   end
 
   # POST /original_orders

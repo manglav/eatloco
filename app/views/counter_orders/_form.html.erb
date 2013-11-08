@@ -1,4 +1,4 @@
-<%= simple_form_for(@counter_order) do |f| %>
+<%= simple_form_for [@original_order, @counter_order] do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">

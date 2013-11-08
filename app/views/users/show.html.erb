@@ -48,3 +48,17 @@
 	</ul>
 
 
+	<h3>My Counter Orders</h3>
+
+		<ul class="thumbnails">
+		<% @user.counter_orders.each do |counter_order| %>
+			<li class="span3">
+				<div class="thumbnail">
+					<%= filepicker_image_tag counter_order.original_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
+					<p><%= link_to counter_order.original_order.menu.name, counter_order %></p>
+		    	<p><%= link_to "Edit", edit_counter_order_url(counter_order) %></p>
+					<p><%= link_to "Destroy", counter_order_url(counter_order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+				</div>
+			</li>
+		<% end %>
+		</ul>

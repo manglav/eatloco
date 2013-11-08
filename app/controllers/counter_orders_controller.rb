@@ -43,6 +43,7 @@ class CounterOrdersController < ApplicationController
   def create
     @original_order = OriginalOrder.find(params[:original_order_id])
     @counter_order = @original_order.counter_orders.new(params[:counter_order])
+    @counter_order.user_id = current_user.id
 
     respond_to do |format|
       if @counter_order.save
