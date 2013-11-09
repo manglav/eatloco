@@ -13,7 +13,7 @@ class OriginalOrdersController < ApplicationController
   # GET /original_orders/1
   # GET /original_orders/1.json
   def show
-    @original_order = OriginalOrder.includes(:counter_orders).find(params[:id])
+    @original_order = OriginalOrder.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -47,6 +47,7 @@ class OriginalOrdersController < ApplicationController
 
     respond_to do |format|
       if @original_order.save
+        # CREATE SIDEKIQ WORKER that WILL Create notifications upon win or lose.
         format.html { redirect_to @original_order, notice: 'Original order was successfully created.' }
         format.json { render json: @original_order, status: :created, location: @original_order }
       else

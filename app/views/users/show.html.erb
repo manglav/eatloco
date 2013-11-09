@@ -2,6 +2,13 @@
 <p>User: <%= @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
 
+<h2> My notifications </h2>
+	<% @user.notifications.each do |msg| %>
+		<div class="alert-info">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<%= msg.content %>
+		</div>
+	<% end %>
 <h3>My Dishes (<%= link_to "Create New Dish", new_dish_url %>)</h3>
 
 	<ul class="thumbnails">
@@ -39,7 +46,7 @@
 		<li class="span3">
 			<div class="thumbnail">
 				<%= filepicker_image_tag elg_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-				<p><%= link_to elg_order.menu.name, elg_order %></p>
+				<p><%= link_to elg_order.menu.name, elg_order %> for <%= elg_order.user.name %></p>
 				<p><%= link_to "Create New Counter Order", new_original_order_counter_order_url(elg_order) %></p>
 			</div>
 		</li>
@@ -54,7 +61,7 @@
 			<li class="span3">
 				<div class="thumbnail">
 					<%= filepicker_image_tag counter_order.original_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-					<p><%= link_to counter_order.original_order.menu.name, counter_order %></p>
+					<p><%= link_to counter_order.original_order.menu.name, counter_order %> for <%= counter_order.original_order.user.name %></p>
 		    	<p><%= link_to "Edit", edit_counter_order_url(counter_order) %></p>
 					<p><%= link_to "Destroy", counter_order_url(counter_order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
 				</div>
@@ -69,7 +76,7 @@
 			<li class="span3">
 				<div class="thumbnail">
 					<%= filepicker_image_tag successful_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-					<p><%= link_to successful_order.menu.name, successful_order %></p>
+					<p><%= link_to successful_order.menu.name, successful_order %> by <%= successful_order.winner.user.name %></p>
 					<p><%= link_to "Destroy", counter_order_url(successful_order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
 				</div>
 			</li>
@@ -84,7 +91,7 @@
 			<li class="span3">
 				<div class="thumbnail">
 					<%= filepicker_image_tag won_order.original_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-					<p><%= link_to won_order.original_order.menu.name, won_order %></p>
+					<p><%= link_to won_order.original_order.menu.name, won_order %> for <%= won_order.original_order.user.name %></p>
 		    	<p><%= link_to "Edit", edit_counter_order_url(won_order) %></p>
 					<p><%= link_to "Destroy", counter_order_url(won_order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
 				</div>
@@ -112,7 +119,7 @@
 			<li class="span3">
 				<div class="thumbnail">
 					<%= filepicker_image_tag lost_order.original_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-					<p><%= link_to lost_order.original_order.menu.name, lost_order %></p>
+					<p><%= link_to lost_order.original_order.menu.name, lost_order %> for <%= lost_order.original_order.user.name %></p>
 				</div>
 			</li>
 		<% end %>

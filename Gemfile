@@ -27,4 +27,5 @@ group :development do
   gem 'rails_layout'
   gem 'awesome_print'
   gem 'meta_request', '~> 0.2.5'
+  gem 'bullet'
 end
