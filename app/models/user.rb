@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
     OriginalOrder.in_progress
       .where(:menu_id => self.dishes.pluck(:menu_id))
       .where("user_id != ?", self.id)
-      .where("id != ?", self.bidded_order_ids)
+      .where("id not in (?)", self.bidded_order_ids.blank? ? '' : self.bidded_order_ids)
     ## add condition that originalorder id NOT in user.counter_orders(array)
   end
 

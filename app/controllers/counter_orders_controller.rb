@@ -25,7 +25,13 @@ class CounterOrdersController < ApplicationController
   # GET /counter_orders/new.json
   def new
     @original_order = OriginalOrder.find(params[:original_order_id])
-    @counter_order = @original_order.counter_orders.new
+
+    relevant_fields = CounterOrder.accessible_attributes.as_json - ["user_id"]
+    # Get's overlapping fields between original_order and counter_order
+    attrs = @original_order.as_json.slice(*relevant_fields)
+    # creates hash of original order data of relevant information
+    @counter_order = @original_order.counter_orders.new(attrs)
+    #initialize counter_order with original_order data
 
     respond_to do |format|
       format.html # new.html.erb

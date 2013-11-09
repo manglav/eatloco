@@ -40,7 +40,6 @@
 			<div class="thumbnail">
 				<%= filepicker_image_tag elg_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
 				<p><%= link_to elg_order.menu.name, elg_order %></p>
-	    	<p><%= link_to "Edit", edit_original_order_url(elg_order) %></p>
 				<p><%= link_to "Create New Counter Order", new_original_order_counter_order_url(elg_order) %></p>
 			</div>
 		</li>

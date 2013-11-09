@@ -1,5 +1,48 @@
 <p id="notice"><%= notice %></p>
 
+<h3> Status Page for Order </h3>
+<h4> What you ordered </h4>
+<p>Name: <%= @original_order.menu.name %></p>
+<p>Price: <%= @original_order.desired_price %></p>
+<p>Weight(grams): <%= @original_order.g_weight %></p>
+
+<h4> Responses </h4>
+
+<%= simple_form_for(@original_order) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+		<%= f.association :winner, collection: @original_order.counter_orders, :label_method => lambda { |co| "#{co.user.name} | #{co.g_weight} | #{co.desired_price} | #{co.delivery_type}"} %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <%= link_to 'Edit', edit_original_order_path(@original_order) %> |
 <%= link_to 'Back', original_orders_path %>
+

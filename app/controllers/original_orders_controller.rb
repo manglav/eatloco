@@ -13,7 +13,7 @@ class OriginalOrdersController < ApplicationController
   # GET /original_orders/1
   # GET /original_orders/1.json
   def show
-    @original_order = OriginalOrder.find(params[:id])
+    @original_order = OriginalOrder.includes(:counter_orders).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
