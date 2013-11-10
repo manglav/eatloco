@@ -1,0 +1,23 @@
+Intro:
+
+var: @var,
+user: @user,
+order: @order,
+positive: @positive,
+any_counter_orders: @any_counter_orders
+
+
+<% if @order.is_a?(OriginalOrder) %>
+is a original order
+	<% if @positive %>
+
+	<p>"Congratulations! We are writing to tell you that your order for :Dish_name has been fulfilled! As a reminder, here are the details you agreed to:</p>
+	<p><%= @order.winner.to_json %></p>
+
+	<% end %>
+
+	<% elsif !@positive%>
+
+
+<% end %>
+

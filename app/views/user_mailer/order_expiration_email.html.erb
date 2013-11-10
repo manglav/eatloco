@@ -1,0 +1,25 @@
+EatLoco www.eatloco.com
+==============================================================
+<%= render partial: "user_mailer/order_expiration_email/intro" %>
+==============================================================
+<%= render partial: "user_mailer/order_expiration_email/advice", locals: {
+	var: @var,
+	user: @user,
+	order: @order,
+	positive: @positive,
+	any_counter_orders: @any_counter_orders
+	} %>
+==============================================================
+<%= render partial: "user_mailer/order_expiration_email/closer", llocals: {
+	var: @var,
+	user: @user,
+	order: @order,
+	positive: @positive,
+	any_counter_orders: @any_counter_orders
+	} %>
+==============================================================
+Sincerely,
+
+EatLoco founder, Varun Mangla
+
+==============================================================

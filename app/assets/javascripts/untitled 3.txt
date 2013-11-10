@@ -1,0 +1,67 @@
+Email Template
+
+3 sections
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Intro(usertype, good or bad, any counter_orders)
+
+case og_user
+
+good:
+
+"Congratulations! We are writing to tell you that your order for :Dish_name has been fulfilled! As a reminder, here are the details you agreed to:
+      :counter_order_winner_details"
+
+bad, with counter_orders
+
+"Apologies. We are writing to tell you that your order for :food_name will not be fulfilled because it has expired, and no winner was selected."
+
+bad, without counter_orders
+
+"Apologies. We are writing to tell you that your order for :food_name will not be fulfilled because it has expired, and no counter_orders were made."
+
+case counter_user
+
+good:
+
+"Congratulations! We are writing to tell you that your counter_order for :Dish_name and :original_order_user_name has been fulfilled! As a reminder, here are the details you agreed to:
+      :counter_order_winner_details"
+
+bad, with counter_orders:
+
+" Apologies. We are writing to tell you that your counter_order for :Dish_name and :original_order_user_name has not been selected."
+
+bad, without counter_orders:
+
+"Apologies. We are writing to tell you that your counter_order for :Dish_name and :original_order_user_name has not been selected. In fact, no winner was selected."
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Advice(usertype, good or bad, any counter_orders, )
+
+case og_usr
+
+good: "As a reminder, you have 24 hours to pay the amount.  The maker has full permission not to fulfill the order if there is no payment."
+
+bad, with counter_orders:   "Try ordering again in the future."
+
+bad, without counter_orders: Try ordering again with a higher price or lower weight in the future.
+~~~~~~~~~~~~~
+case counter_user
+
+good: " As a reminder, you should be payed within 24 hours.  You have full permission not to fulfill the order if there is no payment."
+
+bad: "Try setting a lower price, or higher weight in the future."
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Closer(usertype, good or bad)
+if good
+	if maker "happy making"
+	elsif eater "happy eating"
+	end
+
+else
+	"maybe next time"
