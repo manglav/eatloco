@@ -11,128 +11,69 @@
 	<% end %>
 <h3>My Dishes (<%= link_to "Create New Dish", new_dish_url %>)</h3>
 
-	<ul class="thumbnails">
-	<% @user.dishes.each do |dish| %>
-		<li class="span3">
-			<div class="thumbnail">
-				<figure>
-					<%= filepicker_image_tag dish.photos.first.url, w: 275, h: 275, fit: 'clip' %>
-					<figcaption class="top">
-						<h6><%= dish.name %></h6>
-					</figcaption>
-					<figcaption class="bottom">
-						<h6><%= dish.user.name %></h6>
-					</figcaption>
-				</figure>
-				<div class="thumbnail-label">
-					<p><%= link_to dish.name, dish %></p>
-	    				<p><%= link_to "Edit", edit_dish_url(dish) %></p>
-	    				<p><%= link_to "Destroy", dish_url(dish), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-				</div>
-			</div>
-		</li>
-	<% end %>
-	</ul>
+	<%= render(
+	partial: "my_dishes",
+	collection: @user.dishes, as: :dish,
+	layout: "thumbnails"
+	) || "You have not created any dishes yet." %>
 
 <h3>My In Progress Orders (<%= link_to "Create New Order", new_original_order_url %>)</h3>
 
-	<ul class="thumbnails">
-	<% @user.original_orders.in_progress.each do |order| %>
-		<li class="span3">
-			<div class="thumbnail">
-				<%= filepicker_image_tag order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-				<p><%= link_to order.menu.name, order %></p>
-	    	<p><%= link_to "Edit", edit_original_order_url(order) %></p>
-	    	<p><%= link_to "Destroy", original_order_url(order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-			</div>
-		</li>
-	<% end %>
-	</ul>
+	<%= render(
+	partial: "in_progress_orders",
+	collection: @user.original_orders.in_progress, as: :order,
+	layout: "thumbnails"
+	) || "You have no in progress orders yet." %>
 
 <h3>EatLoCo Orders for Me</h3>
 
-	<ul class="thumbnails">
-	<% @user.elgible_orders.each do |elg_order| %>
-		<li class="span3">
-			<div class="thumbnail">
-				<%= filepicker_image_tag elg_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-				<p><%= link_to elg_order.menu.name, elg_order %> for <%= elg_order.user.name %></p>
-				<p><%= link_to "Create New Counter Order", new_original_order_counter_order_url(elg_order) %></p>
-			</div>
-		</li>
-	<% end %>
-	</ul>
+	<%= render(
+	partial: "eligible_orders",
+	collection: @user.elgible_orders, as: :elg_order,
+	layout: "thumbnails"
+	) || "You have no eligible orders yet." %>
 
 
 	<h3>My Counter Orders</h3>
 
-		<ul class="thumbnails">
-		<% @user.counter_orders.in_progress.each do |counter_order| %>
-			<li class="span3">
-				<div class="thumbnail">
-					<%= filepicker_image_tag counter_order.original_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-					<p><%= link_to counter_order.original_order.menu.name, counter_order %> for <%= counter_order.original_order.user.name %></p>
-		    	<p><%= link_to "Edit", edit_counter_order_url(counter_order) %></p>
-					<p><%= link_to "Destroy", counter_order_url(counter_order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-				</div>
-			</li>
-		<% end %>
-		</ul>
+	<%= render(
+	partial: "counter_orders",
+	collection: @user.counter_orders.in_progress, as: :counter_order,
+	layout: "thumbnails"
+	) || "You have no counter orders yet." %>
 
 	<h3>Food I Will Receive</h3>
 
-		<ul class="thumbnails">
-		<% @user.successful_orders.each do |successful_order| %>
-			<li class="span3">
-				<div class="thumbnail">
-					<%= filepicker_image_tag successful_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-					<p><%= link_to successful_order.menu.name, successful_order %> by <%= successful_order.winner.user.name %></p>
-					<p><%= link_to "Destroy", counter_order_url(successful_order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-				</div>
-			</li>
-		<% end %>
-		</ul>
+	<%= render(
+	partial: "successful_orders",
+	collection: @user.successful_orders, as: :sucessful_order,
+	layout: "thumbnails"
+	) || "You have no sucessful that are arriving yet." %>
 
 
 	<h3>Food I Must Make</h3>
 
-		<ul class="thumbnails">
-		<% @user.won_orders.each do |won_order| %>
-			<li class="span3">
-				<div class="thumbnail">
-					<%= filepicker_image_tag won_order.original_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-					<p><%= link_to won_order.original_order.menu.name, won_order %> for <%= won_order.original_order.user.name %></p>
-		    	<p><%= link_to "Edit", edit_counter_order_url(won_order) %></p>
-					<p><%= link_to "Destroy", counter_order_url(won_order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-				</div>
-			</li>
-		<% end %>
-		</ul>
+	<%= render(
+	partial: "won_orders",
+	collection: @user.won_orders, as: :won_order,
+	layout: "thumbnails"
+	) || "You have no won orders yet." %>
 
 	<h3>Failed Orders</h3>
 
-		<ul class="thumbnails">
-		<% @user.failed_orders.each do |fail_order| %>
-			<li class="span3">
-				<div class="thumbnail">
-					<%= filepicker_image_tag fail_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-					<p><%= link_to fail_order.menu.name, fail_order %></p>
-				</div>
-			</li>
-		<% end %>
-		</ul>
+		<%= render(
+	partial: "failed_orders",
+	collection: @user.failed_orders, as: :fail_order,
+	layout: "thumbnails"
+	) || "You have no failed orders yet." %>
 
 	<h3>Lost Orders</h3>
 
-		<ul class="thumbnails">
-		<% @user.lost_orders.each do |lost_order| %>
-			<li class="span3">
-				<div class="thumbnail">
-					<%= filepicker_image_tag lost_order.original_order.menu.dishes.first.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-					<p><%= link_to lost_order.original_order.menu.name, lost_order %> for <%= lost_order.original_order.user.name %></p>
-				</div>
-			</li>
-		<% end %>
-		</ul>
+	<%= render(
+	partial: "lost_orders",
+	collection: @user.lost_orders, as: :lost_order,
+	layout: "thumbnails"
+	) || "You have no lost orders yet." %>
+
 
 

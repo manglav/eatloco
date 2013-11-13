@@ -1,0 +1,18 @@
+<li class="span3">
+  <div class="thumbnail">
+    <figure>
+      <%= filepicker_image_tag dish.photos.first.url, w: 275, h: 275, fit: 'clip' %>
+      <figcaption class="top">
+        <h6><%= dish.name %></h6>
+      </figcaption>
+      <figcaption class="bottom">
+        <h6><%= dish.user.name %></h6>
+      </figcaption>
+    </figure>
+    <div class="thumbnail-label">
+      <p><%= link_to dish.name, dish %></p>
+      <p><%= link_to "Edit", edit_dish_url(dish) %></p>
+      <p><%= link_to "Destroy", dish_url(dish), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    </div>
+  </div>
+</li>

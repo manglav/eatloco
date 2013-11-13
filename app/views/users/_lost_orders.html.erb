@@ -1,0 +1,16 @@
+<li class="span3">
+  <div class="thumbnail">
+    <figure>
+      <%= filepicker_image_tag lost_order.original_order.menu.dishes.first.photos.first.url, w: 275, h: 275, fit: 'clip' %>
+      <figcaption class="top">
+        <h6><%= lost_order.menu.name %></h6>
+      </figcaption>
+      <figcaption class="bottom">
+        <h6><%= lost_order.user.name %></h6>
+      </figcaption>
+    </figure>
+    <div class="thumbnail-label">
+      <p><%= link_to lost_order.original_order.menu.name, lost_order %> for <%= lost_order.original_order.user.name %></p>
+    </div>
+  </div>
+</li>

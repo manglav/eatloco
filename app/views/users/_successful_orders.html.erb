@@ -1,0 +1,17 @@
+<li class="span3">
+  <div class="thumbnail">
+    <figure>
+      <%= filepicker_image_tag successful_order.menu.dishes.first.photos.first.url, w: 275, h: 275, fit: 'clip' %>
+      <figcaption class="top">
+        <h6><%= successful_order.menu.name %></h6>
+      </figcaption>
+      <figcaption class="bottom">
+        <h6><%= successful_order.user.name %></h6>
+      </figcaption>
+    </figure>
+    <div class="thumbnail-label">
+      <p><%=<%= link_to successful_order.menu.name, successful_order %> by <%= successful_order.winner.user.name %></p>
+      <p><%= link_to "Destroy", counter_order_url(successful_order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    </div>
+  </div>
+</li>

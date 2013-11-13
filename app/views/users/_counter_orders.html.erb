@@ -1,0 +1,17 @@
+<li class="span3">
+  <div class="thumbnail">
+    <figure>
+      <%=filepicker_image_tag counter_order.original_order.menu.dishes.first.photos.first.url, w: 275, h: 275, fit: 'clip' %>
+      <figcaption class="top">
+        <h6><%= counter_order.menu.name %></h6>
+      </figcaption>
+      <figcaption class="bottom">
+        <h6><%= counter_order.user.name %></h6>
+      </figcaption>
+    </figure>
+    <div class="thumbnail-label">
+      <p><%= link_to counter_order.menu.name, counter_order %> for <%= counter_order.user.name %></p>
+      <p><%= link_to "Create New Counter Order", new_original_order_counter_order_url(counter_order) %></p>
+    </div>
+  </div>
+</li>

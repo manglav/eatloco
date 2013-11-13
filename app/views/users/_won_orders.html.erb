@@ -1,0 +1,18 @@
+<li class="span3">
+  <div class="thumbnail">
+    <figure>
+      <%= filepicker_image_tag won_order.original_order.menu.dishes.first.photos.first.url, w: 275, h: 275, fit: 'clip' %>
+      <figcaption class="top">
+        <h6><%= won_order.menu.name %></h6>
+      </figcaption>
+      <figcaption class="bottom">
+        <h6><%= won_order.user.name %></h6>
+      </figcaption>
+    </figure>
+    <div class="thumbnail-label">
+      <p> link_to won_order.original_order.menu.name, won_order %> for <%= won_order.original_order.user.name %></p>
+      <p><%= link_to "Edit", edit_counter_order_url(won_order) %></p>
+      <p><%= link_to "Destroy", counter_order_url(won_order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    </div>
+  </div>
+</li>
