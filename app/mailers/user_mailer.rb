@@ -2,7 +2,6 @@ class UserMailer < ActionMailer::Base
   default from: "from@example.com"
 
   def order_expiration_email(options = {})
-    @var = "hello"
     @user = options[:user]
     @order = options[:order]
     @positive = options[:positive]

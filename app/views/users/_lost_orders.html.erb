@@ -3,7 +3,7 @@
     <figure>
       <%= filepicker_image_tag lost_order.original_order.menu.dishes.first.photos.first.url, w: 275, h: 275, fit: 'clip' %>
       <figcaption class="top">
-        <h6><%= lost_order.menu.name %></h6>
+        <h6><%= lost_order.original_order.menu.name %></h6>
       </figcaption>
       <figcaption class="bottom">
         <h6><%= lost_order.user.name %></h6>

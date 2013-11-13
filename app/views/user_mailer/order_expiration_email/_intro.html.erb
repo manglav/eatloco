@@ -1,23 +1,26 @@
 Intro:
 
-var: @var,
-user: @user,
-order: @order,
-positive: @positive,
-any_counter_orders: @any_counter_orders
-
-
 <% if @order.is_a?(OriginalOrder) %>
-is a original order
 	<% if @positive %>
-
-	<p>"Congratulations! We are writing to tell you that your order for :Dish_name has been fulfilled! As a reminder, here are the details you agreed to:</p>
-	<p><%= @order.winner.to_json %></p>
-
+		<p>"Congratulations! We are writing to tell you that your order for :Dish_name has been fulfilled! As a reminder, here are the details you agreed to:</p>
+		<p><%= @order.winner.to_json %></p>
+	<% else %>
+		<% if @any_counter_orders %>
+			<p>"Apologies. We are writing to tell you that your order for :food_name will not be fulfilled because it has expired, and no winner was selected."</p>
+		<% else %>
+			<p>"Apologies. We are writing to tell you that your order for :food_name will not be fulfilled because it has expired, and no counter_orders were made."</p>
+		<% end %>
 	<% end %>
-
-	<% elsif !@positive%>
-
-
+<% else %>
+	<% if @positive %>
+		<p>""Congratulations! We are writing to tell you that your counter_order for :Dish_name and :original_order_user_name has been fulfilled! As a reminder, here are the details you agreed to:</p>
+		<p><%= @order.to_json %></p>
+	<% else %>
+		<% if @any_counter_orders %>
+			<p>"Apologies. We are writing to tell you that your counter_order for :Dish_name and :original_order_user_name has not been selected."</p>
+		<% else %>
+			<p>"Apologies. We are writing to tell you that your counter_order for :Dish_name and :original_order_user_name has not been selected. In fact, no winner was selected."</p>
+		<% end %>
+	<% end %>
 <% end %>
 

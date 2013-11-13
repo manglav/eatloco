@@ -16,7 +16,7 @@ class OriginalOrder < ActiveRecord::Base
   belongs_to :winner, class_name: "CounterOrder", foreign_key: :winner_id
 
   def lost_orders
-    self.counter_orders.where("winner_id NOT IN (?)", self.counter_order_ids.blank? ? '' : self.original_order.counter_order_ids)
+    self.counter_orders.where("id NOT IN (?)", self.winner_id.blank? ? '' : self.winner_id)
   end
 
 end

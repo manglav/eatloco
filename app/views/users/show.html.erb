@@ -9,71 +9,77 @@
 			<%= msg.content %>
 		</div>
 	<% end %>
-<h3>My Dishes (<%= link_to "Create New Dish", new_dish_url %>)</h3>
 
+<h3>My Dishes (<%= link_to "Create New Dish", new_dish_url %>)</h3>
+	<ul class="thumbnails">
 	<%= render(
 	partial: "my_dishes",
 	collection: @user.dishes, as: :dish,
 	layout: "thumbnails"
 	) || "You have not created any dishes yet." %>
+	</ul>
 
 <h3>My In Progress Orders (<%= link_to "Create New Order", new_original_order_url %>)</h3>
-
+	<ul class="thumbnails">
 	<%= render(
 	partial: "in_progress_orders",
 	collection: @user.original_orders.in_progress, as: :order,
 	layout: "thumbnails"
 	) || "You have no in progress orders yet." %>
+	</ul>
 
 <h3>EatLoCo Orders for Me</h3>
-
+	<ul class="thumbnails">
 	<%= render(
 	partial: "eligible_orders",
 	collection: @user.elgible_orders, as: :elg_order,
 	layout: "thumbnails"
 	) || "You have no eligible orders yet." %>
-
+	</ul>
 
 	<h3>My Counter Orders</h3>
-
+	<ul class="thumbnails">
 	<%= render(
 	partial: "counter_orders",
 	collection: @user.counter_orders.in_progress, as: :counter_order,
 	layout: "thumbnails"
 	) || "You have no counter orders yet." %>
+	</ul>
 
 	<h3>Food I Will Receive</h3>
-
+	<ul class="thumbnails">
 	<%= render(
 	partial: "successful_orders",
 	collection: @user.successful_orders, as: :sucessful_order,
 	layout: "thumbnails"
 	) || "You have no sucessful that are arriving yet." %>
-
+	</ul>
 
 	<h3>Food I Must Make</h3>
-
+	<ul class="thumbnails">
 	<%= render(
 	partial: "won_orders",
 	collection: @user.won_orders, as: :won_order,
 	layout: "thumbnails"
 	) || "You have no won orders yet." %>
+	</ul>
 
 	<h3>Failed Orders</h3>
-
+	<ul class="thumbnails">
 		<%= render(
 	partial: "failed_orders",
 	collection: @user.failed_orders, as: :fail_order,
 	layout: "thumbnails"
 	) || "You have no failed orders yet." %>
+	</ul>
 
 	<h3>Lost Orders</h3>
-
+	<ul class="thumbnails">
 	<%= render(
 	partial: "lost_orders",
 	collection: @user.lost_orders, as: :lost_order,
 	layout: "thumbnails"
 	) || "You have no lost orders yet." %>
-
+	</ul>
 
 
