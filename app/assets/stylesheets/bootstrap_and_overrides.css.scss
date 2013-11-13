@@ -3,3 +3,62 @@ body { padding-top: 60px; }
 @import "bootstrap-responsive";
 
 .thumbnail { background: white;}
+
+.content {
+  background-color: #e2e1dd;
+}
+
+
+
+.thumbnail {
+    box-shadow: 2px 2px 3px rgba(178,177,175,0.8);
+    border-radius: 0px;
+    padding: 0;
+    border: 0;
+    width: 275px;
+}
+
+.thumbnail-label {
+  height: 97px;
+}
+
+figure {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+}
+
+figcaption {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    padding: 10px 20px;
+    opacity: 0;
+    width: 235px;
+    -webkit-transition: all 0.6s ease;
+    -moz-transition: all 0.6s ease;
+    -o-transition: all 0.6s ease;
+}
+
+figure:hover figcaption {
+    opacity: 1;
+}
+
+figure figcaption.top {
+    left: 0;
+    top: -30%;
+}
+
+figure:hover figcaption.top {
+    top: 0;
+}
+
+figure figcaption.bottom {
+    left: 0;
+    bottom: -30%;
+}
+
+figure:hover figcaption.bottom {
+    bottom: 0;
+}

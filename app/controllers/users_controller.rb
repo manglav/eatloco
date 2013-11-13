@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(dishes: [:photos]).find(params[:id])
+    @user = User.includes(dishes: [:photos, :user]).find(params[:id])
   end
 
   def update
