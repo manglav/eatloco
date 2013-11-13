@@ -103,6 +103,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    railroady (1.1.1)
     rails (3.2.14)
       actionmailer (= 3.2.14)
       actionpack (= 3.2.14)
@@ -192,6 +193,7 @@ DEPENDENCIES
   jquery-rails
   meta_request (~> 0.2.5)
   quiet_assets
+  railroady
   rails (= 3.2.14)
   rails_layout
   rb-readline (~> 0.4.2)

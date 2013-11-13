@@ -29,4 +29,5 @@ group :development do
   gem 'awesome_print'
   gem 'meta_request', '~> 0.2.5'
   gem 'bullet'
+  gem 'railroady'
 end

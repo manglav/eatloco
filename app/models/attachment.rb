@@ -5,8 +5,8 @@ class Attachment < ActiveRecord::Base
 
   belongs_to :uploader, class_name: "User", foreign_key: :uploader_id
 
-  has_one :dish_attachments
+  has_one :dish_attachment
 
-  has_one :dish, :through => :dish_attachments, :source => :dish
+  has_one :parent_dish, :through => :dish_attachment, :source => :dish
 
 end
