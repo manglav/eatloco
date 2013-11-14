@@ -16,9 +16,9 @@ $(function() {
 	});
 
 	$('#calendar').fullCalendar()
-
-	title: "you have to make " + # + "dishes today." green
-	title: "you will receive " + # + "dishes today." red
+	//
+	// title: "you have to make " + # + "dishes today." green
+	// title: "you will receive " + # + "dishes today." red
 
 })
 </script>
@@ -34,6 +34,10 @@ $(function() {
 			<%= msg.content %>
 		</div>
 	<% end %>
+
+	<h3> My Schedule </h3>
+
+	<div id="calendar"></div>
 
 <h3>My Dishes (<%= link_to "Create New Dish", new_dish_url %>)</h3>
 	<ul class="thumbnails">

@@ -21,12 +21,16 @@ class OriginalOrder < ActiveRecord::Base
   end
 
   def self.days ## ask TA if this is kosher
-    ans = Hash.new(0)
+    ans = {}
     data = ActiveRecord::Base.connection.select_all(self.select([:id, :delivery_date])) ## pulled from blog - substitute for pluck_all
     data.each do |datum|
       id = datum["id"]
       date = datum["delivery_date"].to_datetime
-      ans["#{date.year}-#{date.month}-#{date.day}"] += 1
+      ans["#{date.year}-#{date.month}-#{date.day}"] ||= {}
+      ans["#{date.year}-#{date.month}-#{date.day}"]["freq"] ||= 0
+      ans["#{date.year}-#{date.month}-#{date.day}"]["freq"] += 1
+      ans["#{date.year}-#{date.month}-#{date.day}"]["original_order_ids"] ||= []
+          ans["#{date.year}-#{date.month}-#{date.day}"]["original_order_ids"].push(id)
       # how to get order id into this hash?  Where to store it?
       # run u.successful_orders.days
     end
