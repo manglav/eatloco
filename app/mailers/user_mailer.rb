@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
     @positive = options[:positive]
     @any_counter_orders = options[:any_counter_orders]
     email_with_name = "#{@user.name} <#{@user.email}>"
-    mail(to: email_with_name, subject: "~~~~~~")
+    mail(to: email_with_name, subject: "EatLoco Order Notification")
   end
 
 end

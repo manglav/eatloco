@@ -68,7 +68,7 @@
 	<ul class="thumbnails">
 		<%= render(
 	partial: "failed_orders",
-	collection: @user.failed_orders, as: :fail_order,
+	collection: @user.failed_orders.includes(:menu), as: :fail_order,
 	layout: "thumbnails"
 	) || "You have no failed orders yet." %>
 	</ul>
