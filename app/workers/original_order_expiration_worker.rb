@@ -31,7 +31,7 @@ class OriginalOrderExpirationWorker
       any_counter_orders: any_counter_orders
     }
 
-    UserMailer.order_expiration_email(original_user_options).deliver
+    send_email_and_notifications(original_user_options).deliver
 
     lost_orders.each do |lost_order|
       counter_user_options = {
@@ -40,7 +40,7 @@ class OriginalOrderExpirationWorker
         positive: positive,
         any_counter_orders: any_counter_orders
       }
-      UserMailer.order_expiration_email(counter_user_options).deliver
+      send_email_and_notifications(counter_user_options).deliver
     end
 
 
@@ -51,8 +51,13 @@ class OriginalOrderExpirationWorker
         positive: positive,
         any_counter_orders: any_counter_orders
       }
-      UserMailer.order_expiration_email(winner_options).deliver # winner
+      send_email_and_notifications(winner_options).deliver # winner
     end
+  end
+
+  def send_email_and_notifications(options)
+    options[:user].notify!(options)
+    UserMailer.order_expiration_email(options).deliver
   end
 
 end

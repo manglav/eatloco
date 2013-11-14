@@ -45,6 +45,21 @@ class User < ActiveRecord::Base
     self.counter_orders.includes(:original_order => :user).where("id not in (?)", self.bidded_order_ids.blank? ? '' : self.bidded_orders.expired.pluck(:winner_id))
   end
 
-
+  def notify!(options)
+    if options[:positive] && options[:order].is_a?(OriginalOrder)
+      content = "Your order for #{options[:order].menu.name} was fulfilled!"
+    elsif options[:positive] && options[:order].is_a?(CounterOrder)
+      content = "Your counter order won for #{options[:order].menu.name}!"
+    elsif !options[:positive] && options[:order].is_a?(OriginalOrder) && options[:any_counter_orders]
+      content = "You did not select a winner for #{options[:order].menu.name}."
+    elsif !options[:positive] && options[:order].is_a?(OriginalOrder) && !options[:any_counter_orders]
+      content = "Your order for #{options[:order].menu.name} had no bids."
+    elsif !options[:positive] && options[:order].is_a?(CounterOrder) && options[:any_counter_orders]
+      content = "Your counter-order was not selected for #{options[:order].menu.name}."
+    elsif !options[:positive] && options[:order].is_a?(CounterOrder) && !options[:any_counter_orders]
+      content = "The auction starter did not select a winner for #{options[:order].menu.name}."
+    end
+    options[:user].notifications.create(content: content)
+  end
 
 end
