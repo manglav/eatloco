@@ -75,5 +75,8 @@ module Eatloco
 
     #Filepicker API Key
     config.filepicker_rails.api_key = ENV["FILEPICKER_API_KEY"]
+
+    #Heroku Option
+    config.assets.initialize_on_precompile = false
   end
 end
