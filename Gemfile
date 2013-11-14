@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 gem 'rails', '3.2.14'
 #gem 'rb-readline', '~> 0.4.2'
-#gem 'sqlite3'
 gem 'pg'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
