@@ -8,7 +8,14 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :current_sign_in_ip
+
+  # Geocoder options
+  geocoded_by :current_sign_in_ip   # can also be an IP address
+  reverse_geocoded_by :latitude, :longitude
+
+  after_validation :geocode          # auto-fetch coordinates
+  after_validation :reverse_geocode  # auto-fetch address
 
   has_many :attachments, foreign_key: :uploader_id
 

@@ -14,9 +14,11 @@ $(function() {
 			}
 		})
 	});
+
 	$('#calendar').fullCalendar()
 
-
+	title: "you have to make " + # + "dishes today." green
+	title: "you will receive " + # + "dishes today." red
 
 })
 </script>
@@ -25,16 +27,13 @@ $(function() {
 <p>User: <%= @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
 
-<h2> My notifications (<%= link_to "All notifications", user_notifications_url(@user) %>) </h2>
+<h2> My notifications </h2>
 	<% @user.notifications.newly_listed.each do |msg| %>
 		<div class="alert-info">
-			<button type="button" data-id="<%= msg.id %>" class="close" data-dismiss="alert">x</button>
+			<button type="button" data-id="<%= msg.id %>" class="close" data-dismiss="alert">&times;</button>
 			<%= msg.content %>
 		</div>
 	<% end %>
-
-<h3>My Calendar </h3>
-<div id="calendar"></div>
 
 <h3>My Dishes (<%= link_to "Create New Dish", new_dish_url %>)</h3>
 	<ul class="thumbnails">
@@ -76,7 +75,7 @@ $(function() {
 	<ul class="thumbnails">
 	<%= render(
 	partial: "successful_orders",
-	collection: @user.successful_orders, as: :successful_order,
+	collection: @user.successful_orders, as: :sucessful_order,
 	layout: "thumbnails"
 	) || "You have no sucessful that are arriving yet." %>
 	</ul>

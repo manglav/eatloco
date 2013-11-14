@@ -73,6 +73,7 @@ GEM
       rails (>= 3, < 5)
     filepicker-rails (1.0.0)
       rails (>= 3.2)
+    geocoder (1.1.8)
     hike (1.2.3)
     i18n (0.6.5)
     journey (1.0.4)
@@ -194,6 +195,7 @@ DEPENDENCIES
   devise
   figaro
   filepicker-rails
+  geocoder
   jquery-rails
   letter_opener
   meta_request (~> 0.2.5)

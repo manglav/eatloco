@@ -20,6 +20,7 @@ gem 'filepicker-rails'
 gem 'twitter-typeahead-rails'
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
+gem 'geocoder'
 
 group :development do
   gem 'better_errors'
