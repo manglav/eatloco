@@ -1,14 +1,14 @@
 class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
-  # def index
-  #   @notifications = Notification.all
-  #
-  #   respond_to do |format|
-  #     format.html # index.html.erb
-  #     format.json { render json: @notifications }
-  #   end
-  # end
+  def index
+    @notifications = current_user.notifications
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @notifications }
+    end
+  end
   #
   # # GET /notifications/1
   # # GET /notifications/1.json

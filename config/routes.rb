@@ -9,7 +9,7 @@ Eatloco::Application.routes.draw do
   root :to => "home#index"
   devise_for :users
   resources :users do
-    resources :notifications, only: [:update]
+    resources :notifications, only: [:index, :update]
   end
   resources :dishes
   resources :attachments

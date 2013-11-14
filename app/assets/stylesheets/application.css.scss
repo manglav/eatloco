@@ -10,7 +10,8 @@
  *
  *= require_self
  *= require_tree .
-*= require bootstrap-datetimepicker
+ *= require bootstrap-datetimepicker
+ *= require fullcalendar
  */
 .content {
   background-color: #eee;

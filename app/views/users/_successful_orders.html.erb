@@ -10,7 +10,7 @@
       </figcaption>
     </figure>
     <div class="thumbnail-label">
-      <p><%=<%= link_to successful_order.menu.name, successful_order %> by <%= successful_order.winner.user.name %></p>
+      <p><%= link_to successful_order.menu.name, successful_order %> by <%= successful_order.winner.user.name %></p>
       <p><%= link_to "Destroy", counter_order_url(successful_order), method: :delete, data: { confirm: 'Are you sure?' } %></p>
     </div>
   </div>

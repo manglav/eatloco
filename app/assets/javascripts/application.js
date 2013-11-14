@@ -2,7 +2,10 @@
 // listed below.
 //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
+// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
 //
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // compiled file.
@@ -16,3 +19,4 @@
 //= require bootstrap
 //= require twitter/typeahead
 //= require bootstrap-datetimepicker
+//= require fullcalendar
