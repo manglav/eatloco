@@ -1,1 +1,12 @@
-<%= @var %>
+Closing
+
+<% if @positive %>
+	<% if @order.is_a?(OriginalOrder) %>
+		<p>"Happy Eating!"</p>
+	<% else %>
+	<p> Happy Making!"</p>
+	<% end %>
+<% else %>
+<p> Maybe Next Time! </p>
+<% end %>
+

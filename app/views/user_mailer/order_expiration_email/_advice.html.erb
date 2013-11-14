@@ -1,1 +1,20 @@
-<%= @var %>
+Advice:
+
+<% if @order.is_a?(OriginalOrder) %>
+	<% if @positive %>
+		<p>"As a reminder, you have 24 hours to pay the amount.  The maker has full permission not to fulfill the order if there is no payment."</p>
+	<% else %>
+		<% if @any_counter_orders %>
+			<p>"Try ordering again in the future."</p>
+		<% else %>
+			<p>Try ordering again with a higher price or lower weight in the future.</p>
+		<% end %>
+	<% end %>
+<% else %>
+	<% if @positive %>
+		<p>" As a reminder, you should be payed within 24 hours.  You have full permission not to fulfill the order if there is no payment."</p>
+	<% else %>
+		<p>"Try setting a lower price, or higher weight in the future."</p>
+	<% end %>
+<% end %>
+

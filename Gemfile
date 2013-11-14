@@ -30,4 +30,5 @@ group :development do
   gem 'meta_request', '~> 0.2.5'
   gem 'bullet'
   gem 'railroady'
+  gem 'letter_opener'
 end

@@ -2,24 +2,24 @@ Intro:
 
 <% if @order.is_a?(OriginalOrder) %>
 	<% if @positive %>
-		<p>"Congratulations! We are writing to tell you that your order for :Dish_name has been fulfilled! As a reminder, here are the details you agreed to:</p>
+		<p>"Congratulations! We are writing to tell you that your order for <%= @order.menu.name %> has been fulfilled! As a reminder, here are the details you agreed to:</p>
 		<p><%= @order.winner.to_json %></p>
 	<% else %>
 		<% if @any_counter_orders %>
-			<p>"Apologies. We are writing to tell you that your order for :food_name will not be fulfilled because it has expired, and no winner was selected."</p>
+			<p>"Apologies. We are writing to tell you that your order for <%= @order.menu.name %> will not be fulfilled because it has expired, and no winner was selected."</p>
 		<% else %>
-			<p>"Apologies. We are writing to tell you that your order for :food_name will not be fulfilled because it has expired, and no counter_orders were made."</p>
+			<p>"Apologies. We are writing to tell you that your order for <%= @order.menu.name %> will not be fulfilled because it has expired, and no counter_orders were made."</p>
 		<% end %>
 	<% end %>
 <% else %>
 	<% if @positive %>
-		<p>""Congratulations! We are writing to tell you that your counter_order for :Dish_name and :original_order_user_name has been fulfilled! As a reminder, here are the details you agreed to:</p>
+		<p>""Congratulations! We are writing to tell you that your counter_order for <%= @order.original_order.menu.name %> for user: <%= @order.original_order.user.name %> has been fulfilled! As a reminder, here are the details you agreed to:</p>
 		<p><%= @order.to_json %></p>
 	<% else %>
 		<% if @any_counter_orders %>
-			<p>"Apologies. We are writing to tell you that your counter_order for :Dish_name and :original_order_user_name has not been selected."</p>
+			<p>"Apologies. We are writing to tell you that your counter_order for <%= @order.original_order.menu.name %> for user: <%= @order.original_order.user.name %> has not been selected."</p>
 		<% else %>
-			<p>"Apologies. We are writing to tell you that your counter_order for :Dish_name and :original_order_user_name has not been selected. In fact, no winner was selected."</p>
+			<p>"Apologies. We are writing to tell you that your counter_order for <%= @order.original_order.menu.name %> for user: <%= @order.original_order.user.name %> has not been selected. In fact, no winner was selected."</p>
 		<% end %>
 	<% end %>
 <% end %>
