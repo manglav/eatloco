@@ -1,4 +1,4 @@
-class HardWorker
+class OriginalOrderExpirationWorker
   include Sidekiq::Worker
 
   def perform(original_order_id)

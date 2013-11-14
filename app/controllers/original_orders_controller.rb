@@ -47,7 +47,7 @@ class OriginalOrdersController < ApplicationController
 
     respond_to do |format|
       if @original_order.save
-        # CREATE SIDEKIQ WORKER that WILL Create notifications upon win or lose.
+        OriginalOrderExpirationWorker.perform_at(@original_order.expiration_date, @original_order.id)
         format.html { redirect_to @original_order, notice: 'Original order was successfully created.' }
         format.json { render json: @original_order, status: :created, location: @original_order }
       else
