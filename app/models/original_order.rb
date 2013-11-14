@@ -6,7 +6,7 @@ class OriginalOrder < ActiveRecord::Base
   # validate :winner_is_a_counter_order
   scope :in_progress, where("expiration_date > ?", Time.now)
   scope :expired, where("expiration_date < ?", Time.now)
-  scope :not_delivered, where("delivery_date > ?", Time.now)
+  scope :not_delivered, where("original_orders.delivery_date > ?", Time.now)
   scope :has_winner, where("winner_id IS NOT NULL")
   scope :no_winner, where(winner_id: nil)
 
