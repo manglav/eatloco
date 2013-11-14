@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def successful_orders
-    self.original_orders.includes(:user).expired.has_winner
+    self.original_orders.includes(:user).expired.not_delivered.has_winner
   end
 
   def failed_orders
@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def won_orders
-    self.counter_orders.includes(:original_order => :user).where(:id => self.bidded_orders.expired.pluck(:winner_id))
+    self.counter_orders.includes(:original_order => :user).where(:id => self.bidded_orders.expired.not_delivered.pluck(:winner_id))
   end
 
   def lost_orders

@@ -6,6 +6,7 @@ class OriginalOrder < ActiveRecord::Base
   # validate :winner_is_a_counter_order
   scope :in_progress, where("expiration_date > ?", Time.now)
   scope :expired, where("expiration_date < ?", Time.now)
+  scope :not_delivered, where("delivery_date > ?", Time.now)
   scope :has_winner, where("winner_id IS NOT NULL")
   scope :no_winner, where(winner_id: nil)
 
@@ -17,6 +18,19 @@ class OriginalOrder < ActiveRecord::Base
 
   def lost_orders
     self.counter_orders.where("id NOT IN (?)", self.winner_id.blank? ? '' : self.winner_id)
+  end
+
+  def self.days ## ask TA if this is kosher
+    ans = Hash.new(0)
+    data = ActiveRecord::Base.connection.select_all(self.select([:id, :delivery_date])) ## pulled from blog - substitute for pluck_all
+    data.each do |datum|
+      id = datum["id"]
+      date = datum["delivery_date"].to_datetime
+      ans["#{date.year}-#{date.month}-#{date.day}"] += 1
+      # how to get order id into this hash?  Where to store it?
+      # run u.successful_orders.days
+    end
+    ans
   end
 
 end
