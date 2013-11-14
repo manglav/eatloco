@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
     elsif !options[:positive] && options[:order].is_a?(CounterOrder) && !options[:any_counter_orders]
       content = "The auction starter did not select a winner for #{options[:order].menu.name}."
     end
-    options[:user].notifications.create(content: content)
+    options[:user].notifications.create(content: content, exited_out: false)
   end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131109015631) do
+ActiveRecord::Schema.define(:version => 20131114012922) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "uploader_id"
@@ -59,8 +59,9 @@ ActiveRecord::Schema.define(:version => 20131109015631) do
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"
     t.string   "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "exited_out", :default => false
   end
 
   create_table "original_orders", :force => true do |t|
