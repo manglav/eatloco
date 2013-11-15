@@ -3,7 +3,7 @@
     <figure>
       <%= filepicker_image_tag dish.photos.first.url, w: 275, h: 275, fit: 'clip' %>
       <figcaption class="top">
-        <h6><%= dish.name %></h6>
+        <h6><%= dish.menu.name %></h6>
       </figcaption>
       <figcaption class="bottom">
         <h6><%= dish.user.name %></h6>
