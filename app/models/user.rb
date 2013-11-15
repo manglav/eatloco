@@ -12,10 +12,8 @@ class User < ActiveRecord::Base
 
   # Geocoder options
   geocoded_by :current_sign_in_ip   # can also be an IP address
-  reverse_geocoded_by :latitude, :longitude
 
-  after_validation :geocode          # auto-fetch coordinates
-  after_validation :reverse_geocode  # auto-fetch address
+  after_validation :geocode, if: :current_sign_in_ip_changed?
 
   has_many :attachments, foreign_key: :uploader_id
 
@@ -32,7 +30,7 @@ class User < ActiveRecord::Base
       .in_progress
       .where(:menu_id => self.dishes.pluck(:menu_id))
       .where("user_id != ?", self.id)
-      .where("id not in (?)", self.bidded_order_ids.blank? ? '' : self.bidded_order_ids)
+      .where("id not in (?)", self.bidded_order_ids)
     ## add condition that originalorder id NOT in user.counter_orders(array)
   end
 
@@ -49,7 +47,7 @@ class User < ActiveRecord::Base
   end
 
   def lost_orders
-    self.counter_orders.includes(:original_order => :user).where("id not in (?)", self.bidded_order_ids.blank? ? '' : self.bidded_orders.expired.pluck(:winner_id))
+    self.counter_orders.includes(:original_order => :user).where("id not in (?)", self.bidded_orders.expired.pluck(:winner_id))
   end
 
   def notify!(options)
