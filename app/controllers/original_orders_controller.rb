@@ -1,6 +1,7 @@
 class OriginalOrdersController < ApplicationController
   # GET /original_orders
   # GET /original_orders.json
+  before_filter :authenticate_user!
   def index
     @original_orders = OriginalOrder.all
 

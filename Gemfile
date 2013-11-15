@@ -32,4 +32,5 @@ group :development do
   gem 'bullet'
   gem 'railroady'
   gem 'letter_opener'
+  gem 'deep_cloneable', '~> 1.6.0'
 end

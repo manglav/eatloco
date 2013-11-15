@@ -1,16 +1,11 @@
-<%= link_to 'New Dish', new_dish_path %>
+<%= link_to 'New Dish', new_dish_path if user_signed_in? %>
 
-<h1>Dishes Directory</h1>
+<h1>Home Page</h1>
 
 <ul class="thumbnails">
-<% @dishes.each do |dish| %>
-		<% if dish.photos.first %>
-			<li class="span4">
-				<%= filepicker_image_tag dish.photos.first.url, w: 160, h: 160, fit: 'clip' %>
-				<p><%= link_to dish.menu.name, dish %></p>
-			</li>
-		<% end %>
-<% end %>
-
+<%= render(
+partial: "my_dishes",
+collection: @dishes, as: :dish,
+layout: "thumbnails"
+) %>
 </ul>
-
