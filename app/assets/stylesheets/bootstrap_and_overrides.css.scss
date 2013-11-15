@@ -2,6 +2,31 @@
 body { padding-top: 60px; }
 @import "bootstrap-responsive";
 
+.navbar {
+    border-color: #6c6d70;
+    background-color: #808285;
+    margin: 0;
+}
+
+.navbar-inner {
+  border-color: #6c6d70;
+  background-color: #808285;
+	background-image: none;
+	background-repeat: no-repeat;
+	filter: none;
+}
+
+.navbar .nav > li > a {
+  color: white;
+}
+.navbar .brand {
+	color: white;
+	text-shadow: none;
+}
+.navbar .a:hover {
+	background-color: #000;
+}
+
 .thumbnail { background: white;}
 
 .content {
