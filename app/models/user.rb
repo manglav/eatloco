@@ -27,10 +27,10 @@ class User < ActiveRecord::Base
 
   def elgible_orders
     OriginalOrder.includes(:user)
-      .in_progress
-      .where(:menu_id => self.dishes.pluck(:menu_id))
-      .where("user_id != ?", self.id)
-      .where("id not in (?)", self.bidded_order_ids)
+      .in_progress # only in progress orders
+      .where(:menu_id => self.dishes.pluck(:menu_id)) # user has to have the menu id
+      .where("user_id != ?", self.id) # user can't bid on their own orders
+      .where("id not in (?)", self.bidded_order_ids.any? ? self.bidded_order_ids : self.bidded_order_ids.join(',')) # user can't have already bid on the order
     ## add condition that originalorder id NOT in user.counter_orders(array)
   end
 
