@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
       .in_progress # only in progress orders
       .where(:menu_id => self.dishes.pluck(:menu_id)) # user has to have the menu id
       .where("user_id != ?", self.id) # user can't bid on their own orders
-      .where("id not in (?)", self.bidded_order_ids.any? ? self.bidded_order_ids : self.bidded_order_ids.join(',')) # user can't have already bid on the order
+      .exclude(:id, self.bidded_order_ids) # user can't have already bid on the order
     ## add condition that originalorder id NOT in user.counter_orders(array)
   end
 
@@ -43,11 +43,33 @@ class User < ActiveRecord::Base
   end
 
   def won_orders
-    self.counter_orders.includes(:original_order => :user).where(:id => self.bidded_orders.expired.not_delivered.pluck(:winner_id))
+    self.counter_orders.includes(:original_order).expired.where("counter_orders.id = original_orders.winner_id")
   end
 
-  def lost_orders
-    self.counter_orders.includes(:original_order => :user).where("id not in (?)", self.bidded_orders.expired.pluck(:winner_id))
+  def lost_orders # the counter orders that belong to original orders that have expired and have not picked you as a winner(either picked someone else, or no one)
+    self.counter_orders.includes(:original_order).expired.where("counter_orders.id != original_orders.winner_id OR original_orders.winner_id IS NULL")
+    #counter orders ----> original orders
+=begin
+FIND BY SQL
+SELECT counter_orders.*
+FROM counter_orders
+INNER JOIN original_orders
+ON original_order_id = original_orders.id
+WHERE counter_orders.id <> original_orders.winner_id
+OR original_orders.winner_id IS NULL
+
+
+
+
+
+
+SELECT counter_orders.*
+FROM counter_orders
+INNER JOIN original_orders
+ON (original_order_id = original_order.id)
+WHERE counter_order.id IS NOT original_order.winner_id
+
+=end
   end
 
   def notify!(options)
