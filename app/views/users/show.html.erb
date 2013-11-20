@@ -61,7 +61,7 @@ $(function() {
 	<ul class="thumbnails">
 	<%= render(
 	partial: "eligible_orders",
-	collection: @user.elgible_orders, as: :elg_order,
+	collection: @user.eligible_orders, as: :elg_order,
 	layout: "thumbnails"
 	) || "You have no eligible orders yet." %>
 	</ul>

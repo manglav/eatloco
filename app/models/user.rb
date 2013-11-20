@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   has_many :bidded_orders, through: :counter_orders, source: :original_order
   has_many :notifications
 
-  def elgible_orders
+  def eligible_orders
     OriginalOrder.includes(:user)
       .in_progress # only in progress orders
       .where(:menu_id => self.dishes.pluck(:menu_id)) # user has to have the menu id
