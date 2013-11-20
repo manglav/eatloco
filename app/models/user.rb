@@ -12,16 +12,13 @@ class User < ActiveRecord::Base
 
   # Geocoder options
   geocoded_by :current_sign_in_ip   # can also be an IP address
-
   after_validation :geocode, if: :current_sign_in_ip_changed?
 
+  # Assocations
   has_many :attachments, foreign_key: :uploader_id
-
   has_many :dishes
-
   has_many :original_orders
   has_many :counter_orders
-
   has_many :bidded_orders, through: :counter_orders, source: :original_order
   has_many :notifications
 
@@ -31,7 +28,7 @@ class User < ActiveRecord::Base
       .where(:menu_id => self.dishes.pluck(:menu_id)) # user has to have the menu id
       .where("user_id != ?", self.id) # user can't bid on their own orders
       .exclude(:id, self.bidded_order_ids) # user can't have already bid on the order
-    ## add condition that originalorder id NOT in user.counter_orders(array)
+    ## defined in initializers/core_extensions
   end
 
   def successful_orders
@@ -43,33 +40,14 @@ class User < ActiveRecord::Base
   end
 
   def won_orders
-    self.counter_orders.includes(:original_order).expired.where("counter_orders.id = original_orders.winner_id")
+    self.counter_orders.includes(:original_order)
+      .expired
+      .where("counter_orders.id = original_orders.winner_id")
   end
 
   def lost_orders # the counter orders that belong to original orders that have expired and have not picked you as a winner(either picked someone else, or no one)
-    self.counter_orders.includes(:original_order).expired.where("counter_orders.id != original_orders.winner_id OR original_orders.winner_id IS NULL")
-    #counter orders ----> original orders
-=begin
-FIND BY SQL
-SELECT counter_orders.*
-FROM counter_orders
-INNER JOIN original_orders
-ON original_order_id = original_orders.id
-WHERE counter_orders.id <> original_orders.winner_id
-OR original_orders.winner_id IS NULL
-
-
-
-
-
-
-SELECT counter_orders.*
-FROM counter_orders
-INNER JOIN original_orders
-ON (original_order_id = original_order.id)
-WHERE counter_order.id IS NOT original_order.winner_id
-
-=end
+    self.counter_orders.includes(:original_order)
+      .expired.where("counter_orders.id != original_orders.winner_id OR original_orders.winner_id IS NULL")
   end
 
   def notify!(options)
